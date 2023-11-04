@@ -6,6 +6,8 @@ console.log("Hello World")
         res.send("Hello Express");
 }) */
 
+app.use("/public",express.static(__dirname + '/public'));
+
 app.get('/', (req, res)=>{
     res.sendFile(__dirname+'/views/index.html');
 });
