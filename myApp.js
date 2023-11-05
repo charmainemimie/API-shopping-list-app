@@ -60,10 +60,20 @@ app.use((req, res, next) => {
 ); */
 
 //endpoint 4 ....route parameters
-app.get('/:word/echo',(req,res) => {
+/* app.get('/:word/echo',(req,res) => {
         const word=req.params.word;
         res.json({echo: word});
-});
+}); */
+
+
+
+//endpoint 5 [app.route(path).get(handler).post(handler)]....Get Query Parameter Input from the Client
+app.get("/name", function(req, res) {
+ //http://localhost:3000/name?first=simangaliso&last=mangorima
+    res.json({
+      name: req.query.first + " " + req.query.last
+    });
+  });
 
 
 
