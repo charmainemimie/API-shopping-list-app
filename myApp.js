@@ -1,7 +1,18 @@
 let express = require('express');
 let app = express();
-console.log("Hello World")
-require('dotenv').config()
+console.log("Hello World");
+require('dotenv').config();
+let bodyParser = require('body-parser');
+
+/* Note: extended is a configuration option that tells body-parser which parsing needs to be used. When extended=false it
+ uses the classic encoding querystring library. When extended=true it uses qs library for parsing.
+
+When using extended=false, values can be only strings or arrays. The object returned when using querystring does not 
+prototypically inherit from the default JavaScript Object, which means functions like hasOwnProperty, toString will not 
+be available. The extended version allows more data flexibility, but it is outmatched by JSON. */
+
+//middleware.....Use body-parser to Parse POST Requests
+app.use(bodyParser.urlencoded({extended: false}));
 
 /* app.get('/', (req, res)=>{
         res.send("Hello Express");
@@ -68,13 +79,26 @@ app.use((req, res, next) => {
 
 
 //endpoint 5 [app.route(path).get(handler).post(handler)]....Get Query Parameter Input from the Client
-app.get("/name", function(req, res) {
+app.get('/name', function(req, res) {
  //http://localhost:3000/name?first=simangaliso&last=mangorima
     res.json({
       name: req.query.first + " " + req.query.last
     });
   });
 
+//endpoint 6....Get Data from POST Requests
+   app.post('/name',(req,res)=>{
+    const firstName =req.body.first;
+    const lastName =req.body.last;
+
+    res.json({name: firstName + " " + lastName})
+  }); 
+
+/*   app.post("/name", (req, res)=> {
+    // Handle the data in the request
+    var string = req.body.first + " " + req.body.last;
+    res.json({ name: string });
+  }); */
 
 
 
