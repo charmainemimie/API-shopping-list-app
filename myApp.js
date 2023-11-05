@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 }); */
 
 //endpoint 3...with middleware
-app.get('/now',(req,res,next) => {
+/* app.get('/now',(req,res,next) => {
     //middleware
     // adding a new property to req object
     // in the middleware function
@@ -57,7 +57,13 @@ app.get('/now',(req,res,next) => {
     (req,res) => {
         res.json({time: req.time})
     }
-);
+); */
+
+//endpoint 4 ....route parameters
+app.get('/:word/echo',(req,res) => {
+        const word=req.params.word;
+        res.json({echo: word});
+});
 
 
 
